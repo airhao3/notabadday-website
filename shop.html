@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Not A Bad Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* 继承基础样式 */
+        /* ... 之前的基础样式 ... */
+
+        /* 商店页面特定样式 */
+        .shop-header {
+            padding: 120px 2rem 2rem;
+            background: linear-gradient(135deg, #FFE6E6 0%, #FFF5E9 100%);
+            text-align: center;
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--white);
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* 购物车侧边栏 */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Featured Products 样式 */
+        .featured-products {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .product-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .product-info p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <!-- ... 与首页相同的导航栏 ... -->
+    </nav>
+
+    <!-- 商店头部 -->
+    <header class="shop-header">
+        <h1>Shop Good Vibes</h1>
+        <p>Discover products that make your day better</p>
+        
+        <!-- 分类过滤器 -->
+        <div class="category-filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Self Care</button>
+            <button class="filter-btn">Home & Living</button>
+            <button class="filter-btn">Wellness</button>
+            <button class="filter-btn">Stationery</button>
+        </div>
+    </header>
+
+    <!-- 商品网格 -->
+    <main class="shop-grid">
+        <!-- 商品卡片示例 -->
+        <div class="product-card">
+            <div class="product-image">
+                <img src="product1.jpg" alt="Comfort Candle">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Self Care</div>
+                <h3 class="product-title">Comfort Candle</h3>
+                <div class="product-price">$24.99</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        <!-- 更多商品卡片 -->
+    </main>
+
+    <!-- 购物车侧边栏 -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <!-- 购物车商品将通过 JavaScript 动态添加 -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">Total: $0.00</div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-carousel">
+                <!-- 产品卡片 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img 
+                            src="assets/images/products/product-1.jpg" 
+                            alt="Comfort Candle"
+                            loading="lazy">
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Comfort Candle</h3>
+                        <p>Bring warmth to your space</p>
+                        <span class="price">$24.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- 产品卡片 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img 
+                            src="assets/images/products/product-2.jpg" 
+                            alt="Mindfulness Journal"
+                            loading="lazy">
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Mindfulness Journal</h3>
+                        <p>Document your daily thoughts</p>
+                        <span class="price">$19.99</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- 更多产品卡片 -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 分类过滤功能
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // 这里添加过滤商品的逻辑
+            });
+        });
+
+        // 购物车功能
+        const cartBtn = document.querySelector('.cart-btn');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const closeCart = document.querySelector('.close-cart');
+
+        cartBtn.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+
+        // 添加到购物车功能
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 这里添加商品到购物车的逻辑
+            });
+        });
+
+        // 添加图片懒加载
+        document.addEventListener('DOMContentLoaded', function() {
+            const productImages = document.querySelectorAll('.product-image img');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            productImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html> 

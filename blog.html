@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Not A Bad Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* 所有页面的基础样式 */
+        :root {
+            /* 颜色变量 */
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #F7F7F7;
+            --white: #FFFFFF;
+            --text-light: #636E72;
+            
+            /* 阴影变量 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* 全局字体设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* 标题字体样式 */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        /* 正文字体样式 */
+        p, span, a, button, input, textarea {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        /* 导航和按钮字体样式 */
+        .nav-links a, 
+        .button,
+        .cta-button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        /* 博客页面特定样式 */
+        .blog-header {
+            padding: 120px 2rem 4rem;
+            background: linear-gradient(135deg, #A6C1EE 0%, #FBC2EB 100%);
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        /* 特色文章样式 */
+        .featured-post {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .featured-post img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        /* 文章网格样式 */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .post-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-list a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .category-list a:hover {
+            color: var(--primary);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <!-- ... 与首页相同的导航栏 ... -->
+    </nav>
+
+    <!-- 博客头部 -->
+    <header class="blog-header">
+        <h1>Stories & Inspiration</h1>
+        <p>Discover ideas and tips for a better everyday life</p>
+    </header>
+
+    <!-- 博客内容 -->
+    <main class="blog-container">
+        <!-- 主要内容区 -->
+        <div class="main-content">
+            <!-- 特色文章 -->
+            <article class="featured-post">
+                <img src="featured-post.jpg" alt="Featured Post">
+                <div class="featured-content">
+                    <span class="post-category">FEATURED</span>
+                    <h2>10 Simple Ways to Make Your Day Better</h2>
+                    <div class="post-meta">
+                        <span>By Sarah Johnson</span>
+                        <span>5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 文章网格 -->
+            <div class="posts-grid">
+                <!-- 文章卡片示例 -->
+                <article class="post-card">
+                    <img src="post1.jpg" alt="Post 1" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">Self Care</span>
+                        <h3 class="post-title">Morning Routines That Work</h3>
+                        <p class="post-excerpt">Discover how to create a morning routine that sets you up for success...</p>
+                        <div class="post-meta">
+                            <span>By Alex Chen</span>
+                            <span>3 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 更多文章卡片 -->
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 分类小部件 -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="category-list">
+                    <li><a href="#">Self Care (12)</a></li>
+                    <li><a href="#">Mindfulness (8)</a></li>
+                    <li><a href="#">Productivity (10)</a></li>
+                    <li><a href="#">Lifestyle (15)</a></li>
+                    <li><a href="#">Wellness (9)</a></li>
+                </ul>
+            </div>
+
+            <!-- 标签云小部件 -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Popular Tags</h3>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">mindfulness</a>
+                    <a href="#" class="tag">self-care</a>
+                    <a href="#" class="tag">wellness</a>
+                    <a href="#" class="tag">productivity</a>
+                    <a href="#" class="tag">lifestyle</a>
+                </div>
+            </div>
+
+            <!-- 热门文章小部件 -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Popular Posts</h3>
+                <!-- 热门文章列表 -->
+            </div>
+        </aside>
+    </main>
+</body>
+</html> 

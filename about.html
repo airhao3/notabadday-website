@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Not A Bad Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* 所有页面的基础样式 */
+        :root {
+            /* 颜色变量 */
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #F7F7F7;
+            --white: #FFFFFF;
+            --text-light: #636E72;
+            
+            /* 阴影变量 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* 全局字体设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* 标题字体样式 */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        /* 正文字体样式 */
+        p, span, a, button, input, textarea {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        /* 导航和按钮字体样式 */
+        .nav-links a, 
+        .button,
+        .cta-button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        /* About页面特定样式 */
+        .about-hero {
+            padding: 120px 2rem 4rem;
+            background: linear-gradient(135deg, #FFE6E6 0%, #FFF5E9 100%);
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* 我们的故事部分 */
+        .our-story {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .story-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 价值观部分 */
+        .values {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* 团队部分 */
+        .team {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: var(--light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .member-role {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* 联系部分 */
+        .contact {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .story-container {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <!-- ... 与首页相同的导航栏 ... -->
+    </nav>
+
+    <!-- Hero部分 -->
+    <header class="about-hero">
+        <div class="about-hero-content">
+            <h1>Making Every Day a Better Day</h1>
+            <p>We believe in the power of small moments and simple pleasures to transform ordinary days into extraordinary ones.</p>
+        </div>
+    </header>
+
+    <!-- 我们的故事 -->
+    <section class="our-story">
+        <div class="story-container">
+            <div class="story-image">
+                <img src="story-image.jpg" alt="Our Story">
+            </div>
+            <div class="story-content">
+                <h2>Our Story</h2>
+                <p>Not A Bad Day started with a simple idea: every day has the potential to be a good day. We believe that small changes and mindful choices can transform our daily experiences.</p>
+                <p>Founded in 2023, we've made it our mission to curate products and share ideas that help people find joy in their everyday lives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我们的价值观 -->
+    <section class="values">
+        <div class="values-container">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">✨</div>
+                    <h3>Mindfulness</h3>
+                    <p>Living in the present moment and finding beauty in the everyday.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌱</div>
+                    <h3>Growth</h3>
+                    <p>Embracing continuous improvement and personal development.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💫</div>
+                    <h3>Positivity</h3>
+                    <p>Choosing to focus on the good while acknowledging all emotions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我们的团队 -->
+    <section class="team">
+        <div class="team-container">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="team1.jpg" alt="Team Member 1" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">Sarah Johnson</h3>
+                        <div class="member-role">Founder & Creative Director</div>
+                        <p>Passionate about helping others find joy in their everyday lives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact">
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Whether you have a question, a suggestion, or just want to say hello, we're here to help.</p>
+            <a href="mailto:contact@notabadday.com" class="contact-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <!-- ... 与首页相同的页脚 ... -->
+    </footer>
+</body>
+</html> 
