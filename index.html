@@ -722,6 +722,219 @@
             padding-top: 3rem;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
+
+        /* Daily Inspiration Styles */
+        .daily-inspiration {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .daily-inspiration .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .daily-inspiration h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .inspiration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .inspiration-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+
+        .inspiration-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-image {
+            position: relative;
+            padding-top: 60%; /* 16:9 比例 */
+            overflow: hidden;
+        }
+
+        .card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .inspiration-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        .card-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .read-time {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+        }
+
+        .view-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-view-more {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn-view-more:hover {
+            background: var(--primary-dark);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .inspiration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .daily-inspiration {
+                padding: 4rem 1rem;
+            }
+        }
+
+        /* 用户头像样式 */
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            background: #F5F5F5;
+            position: relative;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 头像占位符样式 */
+        .avatar-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F5F5F5;
+        }
+
+        .avatar-placeholder::before {
+            content: '\f007';  /* Font Awesome 用户图标 */
+            font-family: 'Font Awesome 5 Free';
+            font-size: 2rem;
+            color: #CCCCCC;
+        }
+
+        /* 头像加载动画 */
+        .user-avatar img {
+            transition: opacity 0.3s ease;
+        }
+
+        .user-avatar img.loading {
+            opacity: 0;
+        }
+
+        /* 评价卡片样式 */
+        .testimonial-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -773,60 +986,74 @@
         </div>
     </section>
 
-    <!-- 每日灵感区域 -->
+    <!-- Daily Inspiration Section -->
     <section class="daily-inspiration">
         <div class="container">
             <h2>Daily Inspiration</h2>
+            <p class="section-subtitle">Stories and ideas to brighten your day</p>
+            
             <div class="inspiration-grid">
-                <!-- 冥想卡片 -->
-                <div class="inspiration-card">
+                <!-- 文章卡片 1 -->
+                <article class="inspiration-card">
                     <div class="card-image">
-                        <picture>
-                            <!-- WebP版本 -->
-                            <source 
-                                srcset="assets/images/inspiration/mindfulness.webp"
-                                type="image/webp">
-                            <!-- JPG备选 -->
-                            <img 
-                                src="assets/images/inspiration/mindfulness.jpg"
-                                alt="Mindfulness Practice"
-                                loading="lazy"
-                                width="600"
-                                height="400">
-                        </picture>
+                        <img 
+                            src="assets/images/inspiration/mindfulness.webp" 
+                            alt="Mindfulness Practice"
+                            loading="lazy">
                     </div>
                     <div class="card-content">
-                        <span class="category">Mental Wellness</span>
-                        <h3>5-Minute Mindfulness</h3>
-                        <p>Simple meditation techniques to help you stay present and focused throughout the day.</p>
-                        <a href="#" class="read-more">Learn More →</a>
+                        <div class="card-category">Mindfulness</div>
+                        <h3>5 Simple Mindfulness Practices for Daily Life</h3>
+                        <p>Discover easy ways to incorporate mindfulness into your everyday routine.</p>
+                        <div class="card-meta">
+                            <span class="read-time">5 min read</span>
+                            <a href="/blog/mindfulness-practices" class="read-more">Read More</a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- 晨间习惯卡片 -->
-                <div class="inspiration-card">
+                <!-- 文章卡片 2 -->
+                <article class="inspiration-card">
                     <div class="card-image">
-                        <picture>
-                            <source 
-                                srcset="assets/images/inspiration/morning-routine.webp"
-                                type="image/webp">
-                            <img 
-                                src="assets/images/inspiration/morning-routine.jpg"
-                                alt="Morning Routine"
-                                loading="lazy"
-                                width="600"
-                                height="400">
-                        </picture>
+                        <img 
+                            src="assets/images/inspiration/morning-routine.webp" 
+                            alt="Morning Routine"
+                            loading="lazy">
                     </div>
                     <div class="card-content">
-                        <span class="category">Lifestyle</span>
-                        <h3>Perfect Morning Routine</h3>
-                        <p>Start your day right with these energizing morning habits for productivity and positivity.</p>
-                        <a href="#" class="read-more">Learn More →</a>
+                        <div class="card-category">Lifestyle</div>
+                        <h3>Create Your Perfect Morning Routine</h3>
+                        <p>Start your day right with these energizing morning habits.</p>
+                        <div class="card-meta">
+                            <span class="read-time">4 min read</span>
+                            <a href="/blog/morning-routine" class="read-more">Read More</a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- 更多卡片 -->
+                <!-- 文章卡片 3 -->
+                <article class="inspiration-card">
+                    <div class="card-image">
+                        <img 
+                            src="assets/images/inspiration/cozy-space.webp" 
+                            alt="Cozy Space"
+                            loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Home</div>
+                        <h3>Creating a Cozy Space for Relaxation</h3>
+                        <p>Transform your living space into a peaceful sanctuary.</p>
+                        <div class="card-meta">
+                            <span class="read-time">6 min read</span>
+                            <a href="/blog/cozy-space" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 查看更多按钮 -->
+            <div class="view-more">
+                <a href="/blog" class="btn-view-more">View All Articles</a>
             </div>
         </div>
     </section>
@@ -903,10 +1130,14 @@
             <div class="testimonial-slider">
                 <div class="testimonial-item">
                     <div class="user-avatar">
-                        <!-- 移除 img 标签，使用 CSS 实现占位效果 -->
+                        <img 
+                            src="assets/images/avatar/avatar1.jpg"
+                            alt="Allen Iversion."
+                            loading="lazy"
+                            onerror="this.parentElement.classList.add('avatar-placeholder')">
                     </div>
                     <p class="testimonial-text">"Not A Bad Day has completely changed my perspective on daily life. The products and tips have helped me create better habits."</p>
-                    <h4>Sarah M.</h4>
+                    <h4>Allen Iverson.</h4>
                     <span class="location">New York, USA</span>
                 </div>
                 <!-- 更多评价 -->
@@ -1268,6 +1499,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             const learnMoreBtn = document.querySelector('.hero-buttons .secondary');
             learnMoreBtn.addEventListener('click', scrollToWhyChooseUs);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatars = document.querySelectorAll('.user-avatar img');
+            
+            avatars.forEach(img => {
+                // 图片加载错误时显示占位符
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    this.parentElement.classList.add('avatar-placeholder');
+                };
+                
+                // 图片加载成功时移除占位符
+                img.onload = function() {
+                    this.style.display = 'block';
+                    this.parentElement.classList.remove('avatar-placeholder');
+                };
+            });
         });
     </script>
 </body>
