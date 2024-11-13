@@ -4,1075 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Not A Bad Day - Make Every Day Better</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preload" href="assets/images/hero/hero-bg.jpg" as="image">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <style>
-        :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --dark: #2D3436;
-            --light: #F7F7F7;
-            --white: #FFFFFF;
-            
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
-            
-            /* Hero背景 */
-            --hero-desktop: 1920x1080px;
-            --hero-mobile: 768x1024px;
-            
-            /* 产品图片 */
-            --product-image: 800x800px;
-            
-            /* 灵感卡片 */
-            --inspiration-image: 600x400px;
-            
-            /* 用户头像 */
-            --avatar-size: 160x160px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-        }
-
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--white);
-            padding: 1rem 2rem;
-            box-shadow: var(--shadow-sm);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* 英雄区域 */
-        .hero {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* 添加渐变遮罩使文字更清晰 */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(0, 0, 0, 0.3),
-                rgba(0, 0, 0, 0.4)
-            );
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            max-width: 800px;
-            padding: 0 2rem;
-            text-align: center;
-            z-index: 2;
-            color: #FFFFFF;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #FFFFFF;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #FFFFFF;
-        }
-
-        /* 心情追踪器 */
-        .mood-tracker {
-            padding: 4rem 2rem;
-            background: var(--white);
-        }
-
-        .mood-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .mood-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .mood-btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            background: var(--light);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .mood-btn:hover {
-            
-            transform: translateY(-3px);
-        }
-
-        /* 每日推荐 */
-        .daily-picks {
-            padding: 4rem 2rem;
-            background: var(--light);
-        }
-
-        .picks-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background: #F5F5F5;
-            overflow: hidden;
-        }
-
-        .product-image.placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-image.placeholder::before {
-            content: '\f03e';
-            font-family: 'Font Awesome 5 Free';
-            font-size: 2rem;
-            color: #CCCCCC;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        /* 生活灵感区 */
-        .inspiration {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
-            color: var(--dark);
-        }
-
-        .inspiration-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .inspiration-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease;
-        }
-
-        .inspiration-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-image {
-            position: relative;
-            padding-top: 60%;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .inspiration-card:hover .card-image img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .category {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--light);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-content h3 {
-            margin: 0.5rem 0;
-            font-size: 1.25rem;
-            color: var(--dark);
-        }
-
-        .card-content p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .read-more:hover {
-            transform: translateX(5px);
-        }
-
-        /* 新增：用户评价轮播 */
-        .testimonials {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #FFE6E6 0%, #FFF5E9 100%);
-        }
-
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .testimonial-item {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-        }
-
-        /* 新增：特色商品展示 */
-        .featured-products {
-            padding: 4rem 2rem;
-            background: var(--white);
-        }
-
-        .product-carousel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            padding: 0 1rem;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background: #F5F5F5;
-            overflow: hidden;
-        }
-
-        .product-image.placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-image.placeholder::before {
-            content: '\f03e';
-            font-family: 'Font Awesome 5 Free';
-            font-size: 2rem;
-            color: #CCCCCC;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-info p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            display: block;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .add-to-cart:hover {
-            background: var(--primary-dark);
-        }
-
-        /* 新增：订阅区域 */
-        .newsletter {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
-            text-align: center;
-        }
-
-        .newsletter-form {
-            max-width: 500px;
-            margin: 2rem auto 0;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-        }
-
-        .newsletter-button {
-            padding: 1rem 2rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .newsletter-button:hover {
-            transform: translateY(-2px);
-        }
-
-        /* 图片相关样式 */
-        .hero {
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* 添加暗色遮罩使文字更清晰 */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 产品图片样式 */
-        .product-image {
-            position: relative;
-            padding-top: 100%; /* 1:1 宽高比 */
-            overflow: hidden;
-        }
-
-        .product-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        /* 灵感卡片图片 */
-        .card-image {
-            position: relative;
-            padding-top: 60%; /* 16:9 宽高比 */
-            margin-bottom: 1rem;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 用户头像样式 */
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* 添加 hero-buttons 样式 */
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .cta-button {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button.primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .cta-button.secondary {
-            background: var(--white);
-            color: var(--primary);
-        }
-
-        /* 添加 container 通用样式 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* 添加 footer 样式 */
-        .footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .footer-section {
-            padding: 0 1rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-
-        .footer-section p {
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* 快速链接样式 */
-        .quick-links ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .quick-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .quick-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .quick-links a:hover {
-            color: var(--primary);
-        }
-
-        /* 社交媒体链接样式 */
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .social-links a {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary);
-        }
-
-        /* 版权信息样式 */
-        .footer-bottom {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-bottom p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .footer-section {
-                padding: 0;
-            }
-        }
-
-        /* 添加部分间距和过渡效果 */
-        .featured-products {
-            padding-bottom: 4rem;  /* 增加底部间距 */
-        }
-
-        .why-choose-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(to bottom, var(--light) 0%, var(--white) 100%);  /* 添加渐变背景 */
-        }
-
-        /* 确保内容之间有良好的视觉分隔 */
-        .why-choose-section + .footer {
-            margin-top: 0;  /* 移除额外间距 */
-        }
-
-        /* 优化特性卡片样式 */
-        .feature-card {
-            background: var(--white);
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* 优化承诺部分样式 */
-        .promise-section {
-            margin-top: 5rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        /* Daily Inspiration Styles */
-        .daily-inspiration {
-            padding: 6rem 2rem;
-            background: var(--light);
-        }
-
-        .daily-inspiration .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .daily-inspiration h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-        }
-
-        .inspiration-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .inspiration-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease;
-        }
-
-        .inspiration-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .card-image {
-            position: relative;
-            padding-top: 60%; /* 16:9 比例 */
-            overflow: hidden;
-        }
-
-        .card-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .inspiration-card:hover .card-image img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-category {
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-content h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--dark);
-            line-height: 1.4;
-        }
-
-        .card-content p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .read-time {
-            color: var(--text-light);
-            font-size: 0.875rem;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: var(--primary-dark);
-        }
-
-        .view-more {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .btn-view-more {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--primary);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: background 0.3s ease;
-        }
-
-        .btn-view-more:hover {
-            background: var(--primary-dark);
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .inspiration-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .daily-inspiration {
-                padding: 4rem 1rem;
-            }
-        }
-
-        /* 用户头像样式 */
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            overflow: hidden;
-            background: #F5F5F5;
-            position: relative;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* 头像占位符样式 */
-        .avatar-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #F5F5F5;
-        }
-
-        .avatar-placeholder::before {
-            content: '\f007';  /* Font Awesome 用户图标 */
-            font-family: 'Font Awesome 5 Free';
-            font-size: 2rem;
-            color: #CCCCCC;
-        }
-
-        /* 头像加载动画 */
-        .user-avatar img {
-            transition: opacity 0.3s ease;
-        }
-
-        .user-avatar img.loading {
-            opacity: 0;
-        }
-
-        /* 评价卡片样式 */
-        .testimonial-item {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-item h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .location {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-    </style>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover mindful products and daily inspiration to enhance your everyday life.">
+    <meta name="keywords" content="lifestyle, mindfulness, daily inspiration, wellness products">
+    <meta name="author" content="Not A Bad Day">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Not A Bad Day - Make Every Day Better">
+    <meta property="og:description" content="Your daily companion for better living.">
+    <meta property="og:image" content="https://yourdomain.com/assets/images/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/icon-192x192.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/header.css">
+    <link rel="stylesheet" href="assets/css/components/hero.css">
+    <link rel="stylesheet" href="assets/css/components/products.css">
+    <link rel="stylesheet" href="assets/css/components/blog.css">
+    <link rel="stylesheet" href="assets/css/components/footer.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <!-- 页面加载动画 -->
+    <div class="page-loader">
+        <div class="loader"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="logo">Not A Bad Day</a>
             <div class="nav-links">
-                <a href="/shop">Shop</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
+                <a href="#featured-products">Shop</a>
+                <a href="#about">About</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </div>
             </div>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- 雄区域增强版 -->
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background">
-            <picture>
-                <!-- 大屏幕版本 -->
-                <source 
-                    media="(min-width: 1024px)" 
-                    srcset="assets/images/hero/hero-bg.jpg">
-                <!-- 平板版本 -->
-                <source 
-                    media="(min-width: 768px)" 
-                    srcset="assets/images/hero/hero-bg-medium.jpg">
-                <!-- 移动版本 -->
-                <img 
-                    src="assets/images/hero/hero-bg-small.jpg"
-                    alt="Hero Background"
-                    class="hero-image"
-                    loading="eager" <!-- 立即加载 -->
-                    decoding="async">
-            </picture>
-        </div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Make Every Day Better</h1>
             <p>Discover products and inspiration to brighten your daily life</p>
             <div class="hero-buttons">
-                <button class="cta-button primary" onclick="scrollToProducts()">Start Your Journey</button>
-                <button class="cta-button secondary" onclick="scrollToWhyChooseUs()">Learn More</button>
+                <button class="cta-button primary">Start Your Journey</button>
+                <button class="cta-button secondary">Learn More</button>
             </div>
+        </div>
+        <div class="scroll-hint">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Daily Inspiration Section -->
-    <section class="daily-inspiration">
-        <div class="container">
-            <h2>Daily Inspiration</h2>
-            <p class="section-subtitle">Stories and ideas to brighten your day</p>
-            
-            <div class="inspiration-grid">
-                <!-- 文章卡片 1 -->
-                <article class="inspiration-card">
-                    <div class="card-image">
-                        <img 
-                            src="assets/images/inspiration/mindfulness.webp" 
-                            alt="Mindfulness Practice"
-                            loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">Mindfulness</div>
-                        <h3>5 Simple Mindfulness Practices for Daily Life</h3>
-                        <p>Discover easy ways to incorporate mindfulness into your everyday routine.</p>
-                        <div class="card-meta">
-                            <span class="read-time">5 min read</span>
-                            <a href="/blog/mindfulness-practices" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 文章卡片 2 -->
-                <article class="inspiration-card">
-                    <div class="card-image">
-                        <img 
-                            src="assets/images/inspiration/morning-routine.webp" 
-                            alt="Morning Routine"
-                            loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">Lifestyle</div>
-                        <h3>Create Your Perfect Morning Routine</h3>
-                        <p>Start your day right with these energizing morning habits.</p>
-                        <div class="card-meta">
-                            <span class="read-time">4 min read</span>
-                            <a href="/blog/morning-routine" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 文章卡片 3 -->
-                <article class="inspiration-card">
-                    <div class="card-image">
-                        <img 
-                            src="assets/images/inspiration/cozy-space.webp" 
-                            alt="Cozy Space"
-                            loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">Home</div>
-                        <h3>Creating a Cozy Space for Relaxation</h3>
-                        <p>Transform your living space into a peaceful sanctuary.</p>
-                        <div class="card-meta">
-                            <span class="read-time">6 min read</span>
-                            <a href="/blog/cozy-space" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <!-- 查看更多按钮 -->
-            <div class="view-more">
-                <a href="/blog" class="btn-view-more">View All Articles</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 特色商品展 -->
+    <!-- Featured Products -->
     <section id="featured-products" class="featured-products">
         <div class="container">
             <h2>Featured Products</h2>
             <div class="product-carousel">
-                <!-- 商品卡片 1 -->
-                <div class="product-card">
+                <!-- Product Card 1 -->
+                <div class="product-card" data-product-id="1">
                     <div class="product-image">
                         <img 
                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                             data-src="assets/images/products/product-1.jpg"
                             alt="Comfort Candle"
-                            loading="lazy"
-                            onerror="this.parentElement.classList.add('placeholder')"
-                            onload="if(this.src !== this.dataset.src) { this.src = this.dataset.src; }">
+                            loading="lazy">
                     </div>
                     <div class="product-info">
                         <h3>Comfort Candle</h3>
@@ -1082,16 +98,14 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 2 -->
-                <div class="product-card">
+                <!-- Product Card 2 -->
+                <div class="product-card" data-product-id="2">
                     <div class="product-image">
                         <img 
                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                             data-src="assets/images/products/product-2.jpg"
                             alt="Mindfulness Journal"
-                            loading="lazy"
-                            onerror="this.parentElement.classList.add('placeholder')"
-                            onload="if(this.src !== this.dataset.src) { this.src = this.dataset.src; }">
+                            loading="lazy">
                     </div>
                     <div class="product-info">
                         <h3>Mindfulness Journal</h3>
@@ -1101,16 +115,14 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 3 -->
-                <div class="product-card">
+                <!-- Product Card 3 -->
+                <div class="product-card" data-product-id="3">
                     <div class="product-image">
                         <img 
                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                            data-src="assets/images/products/placeholder-product-image-sq.jpg"
+                            data-src="assets/images/products/product-3.jpg"
                             alt="Essential Oil Diffuser"
-                            loading="lazy"
-                            onerror="this.parentElement.classList.add('placeholder')"
-                            onload="if(this.src !== this.dataset.src) { this.src = this.dataset.src; }">
+                            loading="lazy">
                     </div>
                     <div class="product-info">
                         <h3>Essential Oil Diffuser</h3>
@@ -1123,61 +135,76 @@
         </div>
     </section>
 
-    <!-- 用户评价轮播 -->
-    <section class="testimonials">
+    <!-- Daily Inspiration -->
+    <section id="blog" class="daily-inspiration">
         <div class="container">
-            <h2>What Our Community Says</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-item">
-                    <div class="user-avatar">
+            <h2>Daily Inspiration</h2>
+            <p class="section-subtitle">Stories and tips for a better everyday life</p>
+            <div class="inspiration-grid">
+                <!-- Blog Card 1 -->
+                <article class="inspiration-card">
+                    <div class="card-image">
                         <img 
-                            src="assets/images/avatar/avatar1.jpg"
-                            alt="Allen Iversion."
-                            loading="lazy"
-                            onerror="this.parentElement.classList.add('avatar-placeholder')">
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="assets/images/inspiration/mindfulness.jpg"
+                            alt="Mindfulness Practice"
+                            loading="lazy">
                     </div>
-                    <p class="testimonial-text">"Not A Bad Day has completely changed my perspective on daily life. The products and tips have helped me create better habits."</p>
-                    <h4>Allen Iverson.</h4>
-                    <span class="location">New York, USA</span>
-                </div>
-                <!-- 更多评价 -->
+                    <div class="card-content">
+                        <div class="card-category">Mindfulness</div>
+                        <h3>Simple Mindfulness Practices</h3>
+                        <p>Discover easy ways to incorporate mindfulness into your daily routine.</p>
+                        <div class="card-meta">
+                            <span class="read-time">5 min read</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="inspiration-card">
+                    <div class="card-image">
+                        <img 
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="assets/images/inspiration/morning-routine.jpg"
+                            alt="Morning Routine"
+                            loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Lifestyle</div>
+                        <h3>Create Your Perfect Morning Routine</h3>
+                        <p>Start your day right with these morning routine tips.</p>
+                        <div class="card-meta">
+                            <span class="read-time">4 min read</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- 订阅区域 -->
-    <section class="newsletter">
-        <div class="container">
-            <h2>Stay Inspired</h2>
-            <p>Join our community and receive weekly doses of positivity and inspiration.</p>
-            <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Enter your email">
-                <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- 公司简介 -->
+            <!-- About Section -->
             <div class="footer-section about-section">
                 <h3>About Us</h3>
                 <p>Making every day a little bit better through mindful products and positive inspiration.</p>
             </div>
 
-            <!-- 快速链接 -->
+            <!-- Quick Links -->
             <div class="footer-section quick-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="/shop">Shop</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="#featured-products">Shop</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
 
-            <!-- 联系方式 -->
+            <!-- Connect -->
             <div class="footer-section connect">
                 <h3>Connect</h3>
                 <div class="social-links">
@@ -1189,335 +216,13 @@
             </div>
         </div>
         
-        <!-- 版权信息 -->
         <div class="footer-bottom">
             <p>&copy; 2024 Not A Bad Day. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // 添加简单的轮播能
-        // 添加商品轮播功能
-        // 添加平滑滚动
-        // 添加newsletter表单提交处理
-
-        // 添加图片懒加载
-        document.addEventListener("DOMContentLoaded", function() {
-            const productImages = document.querySelectorAll('.product-image img[data-src]');
-            
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            observer.unobserve(img);
-                            
-                            console.log('Loading image:', img.src); // 调试信息
-                        }
-                    }
-                });
-            });
-
-            productImages.forEach(img => {
-                imageObserver.observe(img);
-                console.log('Observing image:', img.dataset.src); // 调试信息
-            });
-        });
-
-        // 添加轮播功能
-        const testimonialSlider = {
-            currentSlide: 0,
-            items: document.querySelectorAll('.testimonial-item'),
-            
-            init() {
-                this.showSlide(0);
-                setInterval(() => this.nextSlide(), 5000);
-            },
-            
-            showSlide(index) {
-                this.items.forEach(item => item.style.display = 'none');
-                this.items[index].style.display = 'block';
-            },
-            
-            nextSlide() {
-                this.currentSlide = (this.currentSlide + 1) % this.items.length;
-                this.showSlide(this.currentSlide);
-            }
-        };
-
-        // 添加表单处理
-        const newsletterForm = document.querySelector('.newsletter-form');
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
-            // 这里添加订阅处理逻辑
-            console.log('Subscribed:', email);
-            e.target.reset();
-        });
-
-        // 添加平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // 修改图片错误处理
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('error', function() {
-                const container = this.parentElement;
-                if (container.classList.contains('product-image')) {
-                    this.src = 'assets/images/placeholders/product-placeholder-xs.jpg';  // 更新路径
-                }
-            });
-        });
-
-        // 图片加载成功时移除占位符
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            img.onload = function() {
-                const container = this.parentElement;
-                container.classList.remove('placeholder');
-                this.style.display = 'block';
-            };
-        });
-
-        // 预加载关键图片
-        const preloadImages = () => {
-            const images = [
-                'assets/images/inspiration/mindfulness.jpg',
-                'assets/images/inspiration/morning-routine.jpg',
-                'assets/images/inspiration/cozy-space.jpg'
-            ];
-
-            images.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-        };
-
-        // 页面加载后执行
-        window.addEventListener('load', preloadImages);
-
-        // 图片加载优化
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroImage = document.querySelector('.hero-image');
-            
-            // 添加加载完成的类名
-            heroImage.onload = function() {
-                heroImage.classList.add('loaded');
-            };
-            
-            // 添加错误处理
-            heroImage.onerror = function() {
-                // 加载失败时使用备用图片
-                heroImage.src = 'assets/images/hero/hero-bg-fallback.jpg';
-            };
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const productImage = document.querySelector('.product-image img');
-            
-            // 打印图片路径
-            console.log('Image path:', productImage.src);
-            
-            // 监听图片加载错误
-            productImage.onerror = function() {
-                console.error('Image failed to load:', productImage.src);
-            };
-            
-            // 监听图片加载成功
-            productImage.onload = function() {
-                console.log('Image loaded successfully');
-            };
-        });
-
-        // 图片加载处理
-        document.addEventListener('DOMContentLoaded', function() {
-            const productImages = document.querySelectorAll('.product-image img');
-            
-            productImages.forEach(img => {
-                // 图片加载错误时显示 placeholder
-                img.onerror = function() {
-                    this.parentElement.classList.add('placeholder');
-                    this.style.display = 'none';
-                };
-                
-                // 图片加载成功时移除 placeholder
-                img.onload = function() {
-                    if (this.src !== 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7') {
-                        this.parentElement.classList.remove('placeholder');
-                        this.style.display = 'block';
-                    }
-                };
-                
-                // 开始加载实际图片
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                }
-            });
-        });
-
-        // Hero 区域按钮处理
-        document.addEventListener('DOMContentLoaded', function() {
-            // Start Your Journey 按钮
-            const startJourneyBtn = document.querySelector('.hero-buttons .primary');
-            startJourneyBtn.addEventListener('click', function() {
-                // 跳转到产品页面
-                window.location.href = '/shop';
-                // 或者滚动到产品区域
-                // document.querySelector('.featured-products').scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Learn More 按钮
-            const learnMoreBtn = document.querySelector('.hero-buttons .secondary');
-            learnMoreBtn.addEventListener('click', function() {
-                // 跳转到关于页面
-                window.location.href = '/about';
-                // 或者滚动到特定区域
-                // document.querySelector('.about-section').scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // 购物车功能
-        const cart = {
-            items: [],
-            
-            addItem(product) {
-                this.items.push(product);
-                this.updateCartUI();
-                this.showNotification('Product added to cart!');
-            },
-            
-            updateCartUI() {
-                // 更新购物车图标数量
-                const cartCount = document.querySelector('.cart-count');
-                if (cartCount) {
-                    cartCount.textContent = this.items.length;
-                }
-            },
-            
-            showNotification(message) {
-                // 显示添加到购物车的提示
-                const notification = document.createElement('div');
-                notification.className = 'cart-notification';
-                notification.textContent = message;
-                
-                document.body.appendChild(notification);
-                
-                // 2秒后移除提示
-                setTimeout(() => {
-                    notification.remove();
-                }, 2000);
-            }
-        };
-
-        // 添加购物车按钮事件
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const card = this.closest('.product-card');
-                const product = {
-                    id: Date.now(), // 临时ID
-                    name: card.querySelector('h3').textContent,
-                    price: card.querySelector('.price').textContent,
-                    image: card.querySelector('img').dataset.src
-                };
-                
-                // 添加动画效果
-                button.classList.add('adding');
-                setTimeout(() => {
-                    button.classList.remove('adding');
-                    cart.addItem(product);
-                }, 500);
-            });
-        });
-
-        // 页面跳转处理
-        function handleNavigation(path) {
-            // 如果是锚点链接，使用平滑滚动
-            if (path.startsWith('#')) {
-                const element = document.querySelector(path);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    return;
-                }
-            }
-            
-            // 否则进行页面跳转
-            window.location.href = path;
-        }
-
-        // 为所有导航链接添加事件处理
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                handleNavigation(this.getAttribute('href'));
-            });
-        });
-
-        // 添加平滑滚动函数
-        function scrollToProducts() {
-            const productsSection = document.getElementById('featured-products');
-            if (productsSection) {
-                productsSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // 或者使用更完整的事件处理方式
-        document.addEventListener('DOMContentLoaded', function() {
-            const startJourneyBtn = document.querySelector('.hero-buttons .primary');
-            startJourneyBtn.addEventListener('click', function() {
-                const productsSection = document.getElementById('featured-products');
-                if (productsSection) {
-                    productsSection.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // 添加 Learn More 滚动功能
-        function scrollToWhyChooseUs() {
-            const section = document.getElementById('why-choose-us');
-            if (section) {
-                section.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // 或者使用事件监听方式
-        document.addEventListener('DOMContentLoaded', function() {
-            const learnMoreBtn = document.querySelector('.hero-buttons .secondary');
-            learnMoreBtn.addEventListener('click', scrollToWhyChooseUs);
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const avatars = document.querySelectorAll('.user-avatar img');
-            
-            avatars.forEach(img => {
-                // 图片加载错误时显示占位符
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    this.parentElement.classList.add('avatar-placeholder');
-                };
-                
-                // 图片加载成功时移除占位符
-                img.onload = function() {
-                    this.style.display = 'block';
-                    this.parentElement.classList.remove('avatar-placeholder');
-                };
-            });
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+{
+  "name": "corp-website",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "live-server",
+    "build": "npm run build:css && npm run build:js"
+  }
+} 

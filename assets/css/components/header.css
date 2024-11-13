@@ -1,0 +1,210 @@
+/* 导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+/* 导航容器 */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo 样式 */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--primary);
+}
+
+/* 导航链接容器 */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* 导航链接样式 */
+.nav-links a {
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+/* 导航链接悬停效果 */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 购物车图标样式 */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.cart-icon i {
+    font-size: 1.2rem;
+    color: var(--dark);
+    transition: color 0.3s ease;
+}
+
+.cart-icon:hover i {
+    color: var(--primary);
+}
+
+/* 购物车数量标记 */
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 0.75rem;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    font-weight: 500;
+}
+
+/* 滚动时隐藏导航栏 */
+.navbar.hide {
+    transform: translateY(-100%);
+}
+
+/* 移动端菜单按钮 */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-toggle i {
+    font-size: 1.5rem;
+    color: var(--dark);
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px; /* 导航栏高度 */
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 1rem;
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 0;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .cart-icon {
+        margin-top: 0.5rem;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        background: var(--dark);
+    }
+
+    .logo,
+    .nav-links a,
+    .cart-icon i {
+        color: var(--white);
+    }
+
+    .mobile-menu-toggle i {
+        color: var(--white);
+    }
+}
+
+/* 动画效果 */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 导航栏出现动画 */
+.navbar {
+    animation: slideDown 0.5s ease;
+}
+
+/* 活跃状态样式 */
+.nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}

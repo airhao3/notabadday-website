@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Not A Bad Day</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .error-message {
+            font-size: 2rem;
+            margin: 1rem 0 2rem;
+            color: var(--dark);
+        }
+
+        .back-home {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Oops! Page not found</p>
+        <p>The page you're looking for doesn't exist or has been moved.</p>
+        <a href="/" class="back-home">Back to Home</a>
+    </div>
+</body>
+</html> 
